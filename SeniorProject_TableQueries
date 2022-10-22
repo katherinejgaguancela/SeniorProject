@@ -1,0 +1,52 @@
+--Queries for current Table we Have worked on 
+-- 10/22/22: Had to drop the tables to add additional columns that needed specific roles but rea added them back into the database. 
+
+CREATE TABLE UserInfo(
+    userID int IDENTITY (1,1) PRIMARY KEY,
+    userName VARCHAR(50),
+    email VARCHAR(110),
+    userPass VARCHAR(50),
+    firstName VARCHAR(110),
+    lastName VARCHAR(110),
+    userType VARCHAR (80) NULL
+);
+
+Create table Game(
+   gameID int IDENTITY (1,1) PRIMARY KEY,
+   gameTitle VARCHAR (120) NOT NULL,
+   gameGenre VARCHAR (50) NOT NULL 
+);
+
+Create Table Platform(
+    platformID int IDENTITY (1,1) PRIMARY KEY,
+    platformType VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE ProfileInfo(
+    profileID int IDENTITY (1,1) PRIMARY KEY,
+    userID int FOREIGN KEY REFERENCES UserInfo(userID),
+    gameID int FOREIGN KEY REFERENCES Game(gameID),
+    platformID int FOREIGN KEY REFERENCES Platform(platformID),
+    profilePic VarBinary (MAX),
+    aboutMe varchar (800),
+    Rating INT
+);
+
+Create table Post(
+    PostID int IDENTITY (1,1) PRIMARY KEY,
+    ProfileID int FOREIGN KEY REFERENCES ProfileInfo(ProfileID),
+    PlatformID int FOREIGN KEY REFERENCES Platform(PlatformID),
+    GameID int FOREIGN KEY REFERENCES GAME(GameID),
+    Description VARCHAR(200),
+    Comments VARCHAR(550) ,
+    Photos VARBINARY (MAX),
+    Videos VarBinary(MAX),
+    Likes INT
+);
+
+Create Table Favorites(
+    favoritesID int IDENTITY (1,1) PRIMARY KEY,
+    userID int FOREIGN KEY REFERENCES UserInfo(userID),
+    gameID int FOREIGN KEY REFERENCES Game(gameID),
+    platformID int FOREIGN KEY REFERENCES Platform(platformID)
+);
