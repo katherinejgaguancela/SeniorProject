@@ -10,6 +10,8 @@ CREATE TABLE UserInfo(
     lastName VARCHAR(110),
     userType VARCHAR (80) NULL
 );
+ALTER TABLE UserInfo
+ADD CONSTRAINT UQ_userName UNIQUE(userName);
 
 Create table Game(
    gameID int IDENTITY (1,1) PRIMARY KEY,
